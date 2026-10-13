@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星都双子 · 外传合集 | WIG</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0e18'/%3E%3Ccircle cx='13' cy='16' r='6' fill='none' stroke='%23e8b96a' stroke-width='2'/%3E%3Ccircle cx='20' cy='16' r='6' fill='none' stroke='%23ff2e88' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    /* 星门共通 */
+    --void:#070911; --void-2:#0b0e18; --night:#14111c;
+    /* 外传一 · 档案室（暖） */
+    --warm-paper:#f4ead8; --warm-paper-2:#ebe0c9; --warm-ink:#2e2418; --warm-ink-2:#5a4a35;
+    --warm-dim:#8a7a60; --warm-line:#c9b898; --warm-lamp:#e8b96a; --warm-red:#8a3a2a; --warm-red-2:#a84a35;
+    /* 外传二 · 警务终端（冷） */
+    --cold-bg:#12161f; --cold-bg2:#1a1f2e; --cold-panel:#1e2436; --cold-panel2:#242b40;
+    --cold-pink:#ff2e88; --cold-pink-soft:#ff77b0; --cold-green:#00ff88;
+    --cold-text:#e7ecf5; --cold-dim:#8f9bb3; --cold-line:#2c3550;
+    /* 通用 */
+    --text:#e8ecf4; --text-dim:#7e8aa3; --hair:rgba(255,255,255,.09);
+    --mono:"Cascadia Mono","Consolas","SFMono-Regular","Courier New",monospace;
+    --sans:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;
+    --serif:"SimSun","宋体","Songti SC",serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; min-height:100vh; color:var(--text); font-family:var(--sans);
+    font-size:15px; line-height:1.8;
+    background:
+      radial-gradient(1100px 620px at 50% -12%, rgba(232,185,106,.13), transparent 62%),
+      radial-gradient(860px 520px at 8% 102%, rgba(138,58,42,.14), transparent 62%),
+      radial-gradient(900px 560px at 94% 96%, rgba(255,46,136,.11), transparent 62%),
+      linear-gradient(180deg,#070911 0%,#0b0e18 46%,#080a12 100%);
+    background-attachment:fixed;
+  }
+  body::before{ /* 细密星点 */
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.5; z-index:0;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1.2px 1.2px at 78% 12%, rgba(255,255,255,.42), transparent),
+      radial-gradient(1.6px 1.6px at 33% 68%, rgba(255,224,180,.5), transparent),
+      radial-gradient(1.2px 1.2px at 88% 74%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1.3px 1.3px at 55% 38%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.1px 1.1px at 22% 88%, rgba(255,170,210,.35), transparent),
+      radial-gradient(1.5px 1.5px at 66% 90%, rgba(255,255,255,.3), transparent);
+  }
+  a{color:inherit; text-decoration:none}
+  .wrap{position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 26px 90px}
+
+  /* ═══════ 顶部 ═══════ */
+  .crumbs{
+    display:flex; align-items:center; gap:10px; padding:20px 0 0;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:2.2px; color:var(--text-dim);
+  }
+  .crumbs b{color:var(--warm-lamp); font-weight:400}
+
+  header.hero{text-align:center; padding:52px 0 14px}
+  .hero-orbit{
+    position:relative; width:118px; height:118px; margin:0 auto 26px;
+  }
+  .hero-orbit .ring{
+    position:absolute; inset:0; border-radius:50%;
+    border:1px solid rgba(255,255,255,.14);
+    animation:spin 42s linear infinite;
+  }
+  .hero-orbit .ring::after{
+    content:""; position:absolute; top:-3.5px; left:50%; width:7px; height:7px;
+    margin-left:-3.5px; border-radius:50%; background:var(--warm-lamp);
+    box-shadow:0 0 12px var(--warm-lamp);
+  }
+  .hero-orbit .ring.r2{inset:13px; border-color:rgba(255,46,136,.22); animation-duration:29s; animation-direction:reverse}
+  .hero-orbit .ring.r2::after{background:var(--cold-pink); box-shadow:0 0 12px var(--cold-pink)}
+  .hero-orbit .core{
+    position:absolute; inset:32px; border-radius:50%;
+    background:radial-gradient(circle at 40% 36%, #fff8e8, var(--warm-lamp) 42%, var(--warm-red) 100%);
+    box-shadow:0 0 44px rgba(232,185,106,.42), 0 0 90px rgba(255,46,136,.14);
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .hero-kicker{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:5px;
+    color:var(--text-dim); margin-bottom:18px;
+  }
+  h1.title{
+    margin:0; font-family:var(--serif); font-weight:400;
+    font-size:clamp(38px,7vw,68px); letter-spacing:clamp(10px,2.4vw,22px); text-indent:clamp(10px,2.4vw,22px);
+    background:linear-gradient(100deg,#fff5df 6%,var(--warm-lamp) 40%,#ffd0e3 70%,var(--cold-pink) 98%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-sub{
+    margin-top:16px; font-size:14.5px; color:var(--text-dim); letter-spacing:1.4px;
+  }
+  .hero-line{
+    width:210px; height:1px; margin:26px auto 0;
+    background:linear-gradient(90deg,transparent,rgba(232,185,106,.7),rgba(255,46,136,.7),transparent);
+  }
+  .hero-note{margin-top:22px; font-size:13px; color:var(--text-dim)}
+  .hero-note code{
+    font-family:var(--mono); font-size:12px; color:var(--warm-lamp);
+    background:rgba(255,255,255,.05); border:1px solid var(--hair); border-radius:5px; padding:1px 7px;
+  }
+
+  /* ═══════ 章节标题 ═══════ */
+  .sec-head{display:flex; align-items:center; gap:16px; margin:64px 0 26px}
+  .sec-head .bar{width:3px; height:26px; border-radius:2px; background:linear-gradient(180deg,var(--warm-lamp),var(--cold-pink))}
+  .sec-head h2{margin:0; font-size:19px; font-weight:400; letter-spacing:3px}
+  .sec-head .en{font-family:var(--mono); font-size:11px; letter-spacing:3px; color:var(--text-dim)}
+  .sec-head .rule{flex:1; height:1px; background:var(--hair)}
+
+  /* ═══════ 双面卡片 ═══════ */
+  .pair{display:grid; grid-template-columns:1fr 1fr; gap:26px}
+  .card{
+    position:relative; border-radius:16px; overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s;
+  }
+  .card:hover{transform:translateY(-4px)}
+
+  /* —— 外传一：档案室暖调 —— */
+  .card.warm{
+    background:linear-gradient(180deg,var(--warm-paper) 0%,var(--warm-paper-2) 100%);
+    color:var(--warm-ink); border:1px solid rgba(201,184,152,.5);
+    box-shadow:0 26px 60px rgba(0,0,0,.55), inset 0 0 90px rgba(200,150,70,.1);
+  }
+  .card.warm:hover{box-shadow:0 34px 76px rgba(0,0,0,.62), 0 0 0 1px rgba(232,185,106,.6), inset 0 0 90px rgba(200,150,70,.16)}
+  .card.warm .cover::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(169,74,53,.05) 0%,rgba(244,234,216,.12) 42%,rgba(244,234,216,.96) 100%);
+  }
+  .card.warm .seal{
+    position:absolute; z-index:3; top:14px; right:14px;
+    font-family:var(--serif); font-size:11px; letter-spacing:2px; color:#fff;
+    background:var(--warm-red-2); border-radius:4px; padding:3px 9px;
+    transform:rotate(6deg); box-shadow:0 4px 12px rgba(0,0,0,.35);
+  }
+  .card.warm .badge{background:rgba(138,58,42,.08); border-color:rgba(138,58,42,.32); color:var(--warm-red)}
+  .card.warm .kicker{color:var(--warm-red); border-color:var(--warm-red)}
+  .card.warm .ctitle{color:var(--warm-ink); font-family:var(--serif)}
+  .card.warm .cdesc{color:var(--warm-ink-2)}
+  .card.warm .meta-k{color:var(--warm-dim)}
+  .card.warm .meta-v{color:var(--warm-ink-2)}
+  .card.warm .meta-row{border-top:1px dashed rgba(201,184,152,.75)}
+  .card.warm .feat li::before{color:var(--warm-lamp)}
+  .card.warm .feat{color:var(--warm-ink-2)}
+  .btn-warm{
+    display:block; text-align:center; font-size:15px; letter-spacing:2px; color:#fff;
+    background:linear-gradient(180deg,var(--warm-red-2),var(--warm-red));
+    border-radius:9px; padding:13px 18px;
+    box-shadow:0 8px 22px rgba(138,58,42,.34); transition:all .2s;
+  }
+  .btn-warm:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(138,58,42,.46)}
+  .btn-warm-ghost{
+    display:block; text-align:center; font-size:13.5px; letter-spacing:1.5px; color:var(--warm-red);
+    background:rgba(138,58,42,.05); border:1px solid rgba(138,58,42,.32);
+    border-radius:9px; padding:11px 18px; transition:all .2s;
+  }
+  .btn-warm-ghost:hover{background:rgba(138,58,42,.12); border-color:var(--warm-red)}
+
+  /* —— 外传二：警务终端冷调 —— */
+  .card.cold{
+    background:linear-gradient(180deg,var(--cold-panel) 0%,var(--cold-bg) 100%);
+    color:var(--cold-text); border:1px solid var(--cold-line);
+    box-shadow:0 26px 60px rgba(0,0,0,.6), inset 0 0 90px rgba(255,46,136,.05);
+  }
+  .card.cold:hover{box-shadow:0 34px 76px rgba(0,0,0,.68), 0 0 0 1px rgba(255,46,136,.55), inset 0 0 90px rgba(255,46,136,.09)}
+  .card.cold .cover::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(18,22,31,.15) 0%,rgba(18,22,31,.55) 52%,rgba(30,36,54,.97) 100%);
+  }
+  .card.cold .cover::before{ /* 扫描线 */
+    content:""; position:absolute; inset:0; z-index:2; opacity:.28; pointer-events:none;
+    background:repeating-linear-gradient(180deg,rgba(255,255,255,.05) 0 1px,transparent 1px 4px);
+  }
+  .card.cold .seal{
+    position:absolute; z-index:3; top:14px; right:14px;
+    font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cold-bg);
+    background:var(--cold-pink); border-radius:4px; padding:3px 9px;
+    box-shadow:0 0 16px rgba(255,46,136,.6);
+  }
+  .card.cold .badge{background:var(--cold-bg2); border-color:rgba(255,46,136,.42); color:var(--cold-pink-soft)}
+  .card.cold .kicker{color:var(--cold-green)}
+  .card.cold .ctitle{color:#fff; font-family:var(--mono); font-size:24px}
+  .card.cold .cdesc{color:var(--cold-dim)}
+  .card.cold .meta-k{color:var(--cold-dim)}
+  .card.cold .meta-v{color:var(--cold-text)}
+  .card.cold .meta-row{border-top:1px dashed var(--cold-line)}
+  .card.cold .feat li::before{color:var(--cold-green)}
+  .card.cold .feat{color:var(--cold-dim)}
+  .btn-cold{
+    display:block; text-align:center; font-size:15px; letter-spacing:2px; font-weight:600; color:#12161f;
+    background:linear-gradient(180deg,#5bffb0,var(--cold-green));
+    border-radius:9px; padding:13px 18px;
+    box-shadow:0 0 22px rgba(0,255,136,.34); transition:all .2s;
+  }
+  .btn-cold:hover{transform:translateY(-2px); box-shadow:0 0 32px rgba(0,255,136,.5)}
+  .btn-cold-ghost{
+    display:block; text-align:center; font-size:13.5px; letter-spacing:1.5px; color:var(--cold-pink-soft);
+    background:var(--cold-bg2); border:1px solid rgba(255,46,136,.4);
+    border-radius:9px; padding:11px 18px; transition:all .2s;
+  }
+  .btn-cold-ghost:hover{background:rgba(255,46,136,.14); border-color:var(--cold-pink)}
+  .card.cold .ghost-link{border-top:1px dashed var(--cold-line); color:var(--cold-dim)}
+  .card.cold .ghost-link:hover{color:var(--cold-green)}
+
+  /* 通用卡片内部 */
+  .cover{position:relative; height:216px; overflow:hidden; background:var(--night)}
+  .cover img{width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block}
+  .cover-mock{
+    position:absolute; inset:0; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+    background:
+      radial-gradient(520px 240px at 50% 108%, rgba(255,46,136,.16), transparent 68%),
+      linear-gradient(180deg,#0a0d16,#161c2c);
+  }
+  .cover-mock .glyph{filter:drop-shadow(0 0 16px rgba(255,46,136,.5))}
+  .cover-mock .word{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:6px; color:var(--cold-pink-soft);
+  }
+  .card-body{padding:24px 26px 26px; display:flex; flex-direction:column; flex:1; position:relative; z-index:1}
+  .kicker{
+    display:inline-block; font-size:11.5px; letter-spacing:3px; padding:3px 13px; border-radius:20px;
+    border:1px solid; margin-bottom:14px;
+  }
+  .ctitle{margin:0 0 6px; font-size:27px; font-weight:400; letter-spacing:3px}
+  .csub{font-size:12.5px; color:var(--text-dim); letter-spacing:1px; margin-bottom:0}
+  .card.warm .csub{color:var(--warm-dim)}
+  .card.cold .csub{color:var(--cold-dim)}
+  .cdesc{font-size:13.5px; line-height:1.95; margin:14px 0 0}
+  .badges{display:flex; flex-wrap:wrap; gap:7px; margin:16px 0 0}
+  .badge{
+    font-size:11px; letter-spacing:.6px; border:1px solid var(--hair);
+    border-radius:20px; padding:3px 10px; color:var(--text-dim);
+  }
+  .feat{list-style:none; margin:16px 0 0; padding:0; font-size:13px}
+  .feat li{position:relative; padding-left:17px; margin:5px 0}
+  .feat li::before{content:"◆"; position:absolute; left:0; font-size:9px; top:.36em}
+  .meta{margin:18px 0 0}
+  .meta-row{display:flex; justify-content:space-between; gap:12px; padding-top:10px; margin-top:10px; font-size:12.5px}
+  .meta-row:first-child{margin-top:0; padding-top:0; border-top:none !important}
+  .meta-k{font-family:var(--mono); font-size:11.5px; letter-spacing:1px}
+  .meta-v{text-align:right}
+  .actions{margin-top:22px; display:flex; flex-direction:column; gap:10px}
+  .ghost-link{
+    margin-top:14px; padding-top:13px; border-top:1px dashed var(--hair);
+    font-size:12.5px; color:var(--text-dim); display:flex; justify-content:space-between; gap:10px;
+    transition:color .2s;
+  }
+  .ghost-link:hover{color:var(--warm-lamp)}
+  .card.warm .ghost-link{border-top:1px dashed rgba(201,184,152,.75); color:var(--warm-dim)}
+  .card.warm .ghost-link:hover{color:var(--warm-red)}
+
+  /* ═══════ 导航速查 ═══════ */
+  table.nav{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:4px}
+  table.nav th{
+    font-family:var(--mono); font-size:11px; letter-spacing:2px; font-weight:400;
+    color:var(--text-dim); text-align:left; padding:10px 14px;
+    border-bottom:1px solid var(--hair); white-space:nowrap;
+  }
+  table.nav td{padding:13px 14px; border-bottom:1px solid var(--hair); vertical-align:middle}
+  table.nav tr:last-child td{border-bottom:none}
+  table.nav tbody tr{transition:background .18s}
+  table.nav tbody tr:hover{background:rgba(255,255,255,.035)}
+  td.path{font-family:var(--mono); font-size:11.5px; color:var(--text-dim)}
+  td.tone{white-space:nowrap}
+  .chip{
+    display:inline-block; font-size:11px; letter-spacing:.5px; border-radius:20px; padding:2px 10px;
+    border:1px solid;
+  }
+  .chip.w{border-color:rgba(232,185,106,.5); color:var(--warm-lamp); background:rgba(232,185,106,.08)}
+  .chip.c{border-color:rgba(255,46,136,.45); color:var(--cold-pink-soft); background:rgba(255,46,136,.08)}
+  .chip.g{border-color:rgba(0,255,136,.34); color:var(--cold-green); background:rgba(0,255,136,.07)}
+
+  /* ═══════ 提示块 ═══════ */
+  .tips{
+    margin-top:22px; border:1px solid var(--hair); border-radius:13px; padding:20px 24px;
+    background:linear-gradient(135deg,rgba(232,185,106,.055),rgba(255,46,136,.04));
+  }
+  .tips h3{margin:0 0 12px; font-size:14px; font-weight:400; letter-spacing:2px; color:var(--warm-lamp)}
+  .tips ol{margin:0; padding-left:20px; font-size:13.2px; color:var(--text-dim)}
+  .tips li{margin:6px 0}
+  .tips strong{color:var(--text); font-weight:400}
+  .warn{
+    margin-top:18px; border-left:3px solid var(--cold-pink); border-radius:0 10px 10px 0;
+    background:rgba(255,46,136,.07); padding:14px 20px; font-size:13px; color:var(--text-dim);
+  }
+  .warn b{color:var(--cold-pink-soft); font-weight:400}
+
+  footer{
+    margin-top:74px; padding-top:26px; border-top:1px solid var(--hair);
+    text-align:center; font-size:12px; color:var(--text-dim); line-height:2;
+  }
+  footer .star{color:var(--warm-lamp)}
+  footer .q{color:var(--cold-pink-soft); font-family:var(--serif); letter-spacing:2px}
+
+  @media (max-width:920px){
+    .pair{grid-template-columns:1fr; gap:20px}
+    .wrap{padding:0 16px 60px}
+    header.hero{padding:34px 0 6px}
+    .cover{height:180px}
+    .sec-head{margin:44px 0 20px}
+    table.nav{font-size:12.5px}
+    td.path{display:none}
+    table.nav th:nth-child(2){display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crumbs">
+    <span>WIG</span><span>/</span><span>星都双子</span><span>/</span><b>外传合集 · 索引</b>
+  </div>
+
+  <!-- ══════ HERO ══════ -->
+  <header class="hero">
+    <div class="hero-orbit">
+      <div class="ring"></div>
+      <div class="ring r2"></div>
+      <div class="core"></div>
+    </div>
+    <div class="hero-kicker">M E T R O P O L I S &nbsp; O F &nbsp; S T A R S</div>
+    <h1 class="title">星都双子</h1>
+    <p class="hero-sub">外传合集 · 两部独立篇章 · 一条被删除的时间线</p>
+    <div class="hero-line"></div>
+    <p class="hero-note">
+      本页为合集引导页 · 直接双击本目录的 <code>index.html</code> 即可使用，无需安装任何环境
+    </p>
+  </header>
+
+  <!-- ══════ 两部外传 ══════ -->
+  <div class="sec-head">
+    <span class="bar"></span>
+    <h2>两部外传</h2>
+    <span class="en">TWO EPISODES</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="pair">
+
+    <!-- ── 外传一 ── -->
+    <article class="card warm">
+      <div class="cover">
+        <img src="WIG%20game%201.5/assets/cover.jpg" alt="《星都异闻录 · 神秘学协会》封面" loading="lazy">
+        <div class="seal">绝 密</div>
+      </div>
+      <div class="card-body">
+        <span class="kicker">外传 一 · 正传第 1 部之后</span>
+        <h3 class="ctitle">星都异闻录 · 神秘学协会</h3>
+        <p class="csub">2066 年 12 月 – 2067 年 3 月 · 临港市</p>
+        <p class="cdesc">
+          你是新入职的现象调查员<b>温言</b>。在堆满纸页与磁带的神秘学协会档案室里，
+          靠<b>搜索关键词</b>翻阅线索，把一件件「不该存在」的异常归入五类档案——
+          直到你发现，第一份需要归档的，是你自己。
+        </p>
+        <div class="badges">
+          <span class="badge">关键词推理</span>
+          <span class="badge">五类分类判定</span>
+          <span class="badge">九委托 + 隐藏委托</span>
+          <span class="badge">四结局</span>
+          <span class="badge">纯浏览器运行</span>
+        </div>
+        <ul class="feat">
+          <li>没有任何按钮告诉你答案，线索全靠从文本里「搜」出来</li>
+          <li>像真正的档案员一样为异常写下判定书，分错会被驳回</li>
+          <li>暖黄台灯 + 开盘录音机 + 翻页音效的深夜档案室氛围</li>
+          <li>双难度：卡住时给方向提示 / 纯靠推理，剧情完全一致</li>
+        </ul>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-k">单周目时长</span><span class="meta-v">约 1 – 2 小时</span></div>
+          <div class="meta-row"><span class="meta-k">建议设备</span><span class="meta-v">电脑 / 平板 · 建议佩戴耳机</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn-warm" href="WIG%20game%201.5/index.html">▶ 进入游戏</a>
+          <a class="btn-warm-ghost" href="WIG%20game%201.5/Guide.html">📖 完全攻略（含剧透）</a>
+        </div>
+        <a class="ghost-link" href="https://miyeji.cn/games/xing-dou-shuang-zi" target="_blank" rel="noopener">
+          <span>正传第 1 部 《代号：双子》</span><span>miyeji.cn →</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- ── 外传二 ── -->
+    <article class="card cold">
+      <div class="cover">
+        <div class="cover-mock">
+          <svg class="glyph" viewBox="0 0 64 64" width="66" height="66" aria-hidden="true">
+            <path d="M32 4 L56 12 V32 C56 48 45 56 32 60 C19 56 8 48 8 32 V12 Z" fill="none" stroke="#ff2e88" stroke-width="2.5"/>
+            <path d="M20 40 L28 26 L34 34 L44 20" fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="18" r="3" fill="#ff2e88"/>
+          </svg>
+          <div class="word">XINGDU · POLICE TERMINAL</div>
+        </div>
+        <div class="seal">涉密</div>
+      </div>
+      <div class="card-body">
+        <span class="kicker">外传 二 · 正传第 2 部之后</span>
+        <h3 class="ctitle">回声之网</h3>
+        <p class="csub">2069 年 12 月 · 星都公安局政务终端</p>
+        <p class="cdesc">
+          辰天集团破产三个月后，五起形态各异的命案同时落到刑警<b>韩序</b>面前。
+          你全程坐在警局终端前，靠检索、比对、关联图谱与推理，把五案并成一张网——
+          网的尽头，是一个早该被删除的名字。
+        </p>
+        <div class="badges">
+          <span class="badge">桌面模拟</span>
+          <span class="badge">刑侦探案</span>
+          <span class="badge">五案并行</span>
+          <span class="badge">四结局 + 隐藏</span>
+          <span class="badge">无存档 · 单次通关</span>
+        </div>
+        <ul class="feat">
+          <li>完整模拟一台 2069 年操作系统的桌面：文档、数据库、论坛、邮件、监控</li>
+          <li>五案并案靠一张「关联图谱」，12 条关联线全部连上才能结案</li>
+          <li>第三章为真实 23 分钟限时推进，节奏骤然收紧</li>
+          <li>不提供存档：刷新或关机即从头开始，关键选择不可逆</li>
+        </ul>
+        <div class="meta">
+          <div class="meta-row"><span class="meta-k">单周目时长</span><span class="meta-v">约 1 – 1.5 小时</span></div>
+          <div class="meta-row"><span class="meta-k">建议分辨率</span><span class="meta-v">1280×720 起 · 推荐 1920×1080</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn-cold" href="WIG%20game%202.5/game/index.html">▶ 进入游戏</a>
+          <a class="btn-cold-ghost" href="WIG%20game%202.5/%E3%80%8A%E5%9B%9E%E5%A3%B0%E4%B9%8B%E7%BD%91%E3%80%8B%E6%94%BB%E7%95%A5.html">📖 完全攻略（含剧透）</a>
+        </div>
+        <a class="ghost-link" href="WIG%20game%202.5/%E3%80%8A%E6%98%9F%E9%83%BD%E5%8F%8C%E5%AD%90%E5%A4%96%E4%BC%A02%EF%BC%9A%E5%9B%9E%E5%A3%B0%E4%B9%8B%E7%BD%91%E3%80%8B%E7%AC%AC%E4%BA%8C%E7%89%88%E6%96%B0%E5%89%A7%E6%83%85%E5%A4%A7%E7%BA%B2.docx" download>
+          <span>第二版新剧情大纲</span><span>下载 .docx →</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ══════ 导航速查 ══════ -->
+  <div class="sec-head">
+    <span class="bar"></span>
+    <h2>目录速查</h2>
+    <span class="en">INDEX</span>
+    <span class="rule"></span>
+  </div>
+
+  <table class="nav">
+    <thead>
+      <tr><th>名称</th><th>路径</th><th>类型</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="WIG%20game%201.5/index.html"><b>星都异闻录 · 神秘学协会</b></a></td>
+        <td class="path">WIG game 1.5/index.html</td>
+        <td class="tone"><span class="chip w">游戏</span></td>
+        <td>外传一 · 档案员温言 · 九委托推理</td>
+      </tr>
+      <tr>
+        <td><a href="WIG%20game%202.5/game/index.html"><b>回声之网</b></a></td>
+        <td class="path">WIG game 2.5/game/index.html</td>
+        <td class="tone"><span class="chip c">游戏</span></td>
+        <td>外传二 · 刑警韩序 · 五案并线</td>
+      </tr>
+      <tr>
+        <td><a href="WIG%20game%201.5/Guide.html">完全攻略 · 神秘学协会</a></td>
+        <td class="path">WIG game 1.5/Guide.html</td>
+        <td class="tone"><span class="chip g">攻略</span></td>
+        <td>全委托关键词与分类答案 · 带防剧透遮罩</td>
+      </tr>
+      <tr>
+        <td><a href="WIG%20game%202.5/%E3%80%8A%E5%9B%9E%E5%A3%B0%E4%B9%8B%E7%BD%91%E3%80%8B%E6%94%BB%E7%95%A5.html">完全攻略 · 回声之网</a></td>
+        <td class="path">WIG game 2.5/《回声之网》攻略.html</td>
+        <td class="tone"><span class="chip g">攻略</span></td>
+        <td>主线流程 / 线索收集 / 结局条件 / 速查表</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════ 游玩提示 ══════ -->
+  <div class="sec-head">
+    <span class="bar"></span>
+    <h2>游玩提示</h2>
+    <span class="en">BEFORE YOU START</span>
+    <span class="rule"></span>
+  </div>
+
+  <div class="tips">
+    <h3>✧ 建议的游玩顺序</h3>
+    <ol>
+      <li><strong>正传第 1 部《代号：双子》</strong> — 在 miyeji.cn 上游玩，外传一与之关联紧密。</li>
+      <li><strong>外传一 · 星都异闻录</strong> — 档案室推理，认识「温言」与 1,244 这个数字。</li>
+      <li><strong>正传第 2 部</strong> — 了解辰天集团与回声计划的全貌。</li>
+      <li><strong>外传二 · 回声之网</strong> — 只沿用世界观，不出现前作任何角色，可独立游玩。</li>
+    </ol>
+  </div>
+
+  <div class="warn">
+    <b>⚠ 剧透警告：</b>两份攻略包含全部委托的关键词、线索、分类答案与结局条件。
+    建议先自行通关一遍，再回来对照。两份攻略页均已内置剧透遮罩，需手动点击才会展开。
+  </div>
+
+  <div class="warn" style="border-left-color:var(--warm-lamp);background:rgba(232,185,106,.07)">
+    <b style="color:var(--warm-lamp)">⚠ 打开方式：</b>请保持本页与两个游戏文件夹在同一目录下，
+    并且<b style="color:var(--warm-lamp)">不要单独移动某个 html 文件</b>。
+    若浏览器因本地文件策略拒绝加载（页面空白或图片缺失），可在合集根目录执行
+    <code style="font-family:var(--mono);color:var(--warm-lamp)">python -m http.server 8000</code>
+    后访问 <code style="font-family:var(--mono);color:var(--warm-lamp)">http://localhost:8000</code>。
+  </div>
+
+  <footer>
+    <div><span class="star">✦</span> 星都双子 · 外传合集 <span class="star">✦</span></div>
+    <div>本作内容纯属虚构，人物、机构、事件均不存在 · 部分背景素材由 AI 生成</div>
+    <div class="q">「 会搜索 · 有耐心 · 不要追问 」</div>
+  </footer>
+
+</div>
+</body>
+</html>
